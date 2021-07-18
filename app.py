@@ -40,9 +40,9 @@ def get_chain():
 def is_valid():
     is_valid = blockchain.is_chain_valid(blockchain.chain)
     if is_valid:
-        response = {"message": "The blockchain is valid"}
+        response = {"message": "The blockchain is valid."}
     else:
-        response = {"message": "The blockchain is not valid"}
+        response = {"message": "The blockchain is not valid."}
     return jsonify(response), 200
 
 
@@ -72,8 +72,27 @@ def connect_node():
         blockchain.add_node(node)
 
     response = {
-        "message": "All the nodes are now connected",
+        "message": "All the nodes are now connected.",
         "total_nodes": list(blockchain.nodes),
     }
 
     return jsonify(response), 201
+
+
+@app.route("/replace_chain", methods=["GET"])
+def replace_chain():
+    is_chain_replaced = blockchain.replace_chain()
+    chain = blockchain.chain
+
+    if is_chain_replaced:
+        response = {
+            "message": "The nodes had different chains so the chain was replaced by the longest one.",
+            "chain": chain,
+        }
+    else:
+        response = {
+            "message": "All good. The chain is the largest one.",
+            "chain": chain,
+        }
+
+    return jsonify(response), 200
