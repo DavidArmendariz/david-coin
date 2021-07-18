@@ -16,7 +16,13 @@ def mine_block():
     previous_proof = previous_block["proof"]
     proof = blockchain.proof_of_work(previous_proof)
     previous_hash = blockchain.hash(previous_block)
-    blockchain.add_transaction(sender=node_address, receiver="David", amount=1)
+    json = request.get_json()
+    receiver = json.get("receiver")
+
+    if receiver is None:
+        return "Cannot mine block if there is no receiver", 400
+
+    blockchain.add_transaction(sender=node_address, receiver=receiver, amount=1)
     block = blockchain.create_block(proof, previous_hash)
     response = {
         "message": "Congratulations, you just mined a block!",
