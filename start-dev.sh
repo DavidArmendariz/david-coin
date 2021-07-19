@@ -1,5 +1,6 @@
 #!/bin/bash
 
+pyenv local
 export FLASK_ENV=development
 app1="python server.py 5000"
 app2="python server.py 5001"

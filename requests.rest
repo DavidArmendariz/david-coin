@@ -1,0 +1,75 @@
+GET http://localhost:5001/get_chain
+
+###
+
+GET http://localhost:5002/get_chain
+
+###
+
+GET http://localhost:5003/get_chain
+
+###
+
+POST http://localhost:5001/connect_node
+Content-Type: application/json
+
+{
+  "nodes": ["http://127.0.0.1:5002", "http://127.0.0.1:5003"]
+}
+
+###
+
+POST http://localhost:5002/connect_node
+Content-Type: application/json
+
+{
+  "nodes": ["http://127.0.0.1:5001", "http://127.0.0.1:5003"]
+}
+
+###
+
+POST http://localhost:5003/connect_node
+Content-Type: application/json
+
+{
+  "nodes": ["http://127.0.0.1:5001", "http://127.0.0.1:5002"]
+}
+
+###
+
+GET http://localhost:5001/mine_block
+Content-Type: application/json
+
+{
+  "receiver": "Person 1"
+}
+
+###
+
+GET http://localhost:5002/replace_chain
+
+###
+
+GET http://localhost:5003/replace_chain
+
+###
+
+POST http://localhost:5001/add_transaction
+Content-Type: application/json
+
+{
+  "sender": "Person 1",
+  "receiver": "Person 2",
+  "amount": 10000
+}
+
+###
+
+POST http://localhost:5001/add_transaction
+Content-Type: application/json
+
+{
+  "sender": "Person 1",
+  "receiver": "Person 3",
+  "amount": 10000
+}
